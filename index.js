@@ -59,11 +59,16 @@ export const handler=async()=>
 
 const port=process.env.PORT||4000
 
+app.get('/',(_,res)=>
+{
+  res.send('ec2 hi!')
+})
+
 app.get('/:url',(req,res)=>
 {
   const {url}=req.params
   console.log(url);
-  res.send('ec2 hi')
+  res.send('ok')
 })
 
 app.listen(port,()=>console.log('app listening on port '+port))
