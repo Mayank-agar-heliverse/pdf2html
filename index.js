@@ -41,21 +41,15 @@ async function splitPdf(url)
     await fs.promises.writeFile(`${folderPath}/${filename}.pdf`, pdfBytes);
     await convertPDFtohtml(`${folderPath}/${filename}`);
     // .outline file maybe created as a residue
-    // if(fs.existsSync(`./${filename}.outline`)) await fs.promises.unlink(`${filename}.outline`)
+    if(fs.existsSync(`./${filename}.outline`)) await fs.promises.unlink(`${filename}.outline`)
     // remove page pdf
-    // await fs.promises.unlink(`./tmp/${filename}.pdf`)
+    await fs.promises.unlink(`./tmp/${filename}.pdf`)
     // remove html after saving to s3
     // await fs.promises.unlink(`${foldername}/${filename}.hmtl`)
   }
 }
 
 const url='https://monoskop.org/images/d/de/An_Encyclopedia_of_Everything_2014.pdf'
-
-export const handler=async()=>
-{
-  await splitPdf(url)
-  return 'done'
-}
 
 const port=process.env.PORT||4000
 
@@ -64,10 +58,11 @@ app.get('/',(_,res)=>
   res.send('ec2 hi!')
 })
 
-app.get('/:url',(req,res)=>
+app.get('/:url',async(req,res)=>
 {
   const {url}=req.params
   console.log(url);
+  await splitPdf(url)
   res.send('ok')
 })
 
