@@ -1,7 +1,6 @@
 import fs from 'fs';
-// import {PDFDocument} from 'pdf-lib';
-// import pdftohtml from "@dsardar099/pdf-to-html";
-import { exec } from 'child_process';
+import {PDFDocument} from 'pdf-lib';
+import pdftohtml from "@dsardar099/pdf-to-html";
 
 async function convertPDFtohtml(filename)
 {
@@ -47,10 +46,9 @@ async function splitPdf(url)
 
 const url='https://monoskop.org/images/d/de/An_Encyclopedia_of_Everything_2014.pdf'
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+// const delay = ms => new Promise(res => setTimeout(res, ms));
 export const handler=async()=>
 {
-  fs.copyFileSync('./pdf2htmlEX.deb','/tmp/pdf2htmlEX.deb')
   await splitPdf(url)
   return 'done'
 }
