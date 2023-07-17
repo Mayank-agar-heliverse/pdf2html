@@ -1,6 +1,11 @@
 import fs from 'fs';
 import {PDFDocument} from 'pdf-lib';
 import pdftohtml from "@dsardar099/pdf-to-html";
+import express from 'express'
+import cors from 'cors'
+
+const app=express()
+app.use(cors())
 
 async function convertPDFtohtml(filename)
 {
@@ -32,7 +37,7 @@ async function splitPdf(url)
     subDocument.addPage(copiedPage);
     const pdfBytes = await subDocument.save()
     // ensure `foldername` directory exists
-    const filename=`file-${i + 1}`, folderPath='./tmp';
+    const filename=`file-${i + 1}`, folderPath='/tmp';
     await fs.promises.writeFile(`${folderPath}/${filename}.pdf`, pdfBytes);
     await convertPDFtohtml(`${folderPath}/${filename}`);
     // .outline file maybe created as a residue
@@ -46,10 +51,19 @@ async function splitPdf(url)
 
 const url='https://monoskop.org/images/d/de/An_Encyclopedia_of_Everything_2014.pdf'
 
-// const delay = ms => new Promise(res => setTimeout(res, ms));
 export const handler=async()=>
 {
   await splitPdf(url)
   return 'done'
 }
-handler()
+
+const port=process.env.PORT||4000
+
+app.get('/:url',(req,res)=>
+{
+  const {url}=req.params
+  console.log(url);
+  res.send('ec2 hi')
+})
+
+app.listen(port,()=>console.log('app listening on port '+port))

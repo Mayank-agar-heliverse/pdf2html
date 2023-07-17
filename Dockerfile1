@@ -1,1 +1,0 @@
-FROM iapain/pdf2htmlex as pdf2htmlEX
