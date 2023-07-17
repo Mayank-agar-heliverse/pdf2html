@@ -1,0 +1,3 @@
+docker build -t dockerpdf2html .
+docker tag dockerpdf2html:latest 891889412459.dkr.ecr.eu-north-1.amazonaws.com/dockerpdf2html:latest
+docker push 891889412459.dkr.ecr.eu-north-1.amazonaws.com/dockerpdf2html:latest

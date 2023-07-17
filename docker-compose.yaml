@@ -1,0 +1,10 @@
+version: '3'
+services:
+  container1:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+  container2:
+    build:
+      context: .
+      dockerfile: Dockerfile2

@@ -1,0 +1,17 @@
+{
+  "name": "pdf-html",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dsardar099/pdf-to-html": "^1.0.6",
+    "pdf-lib": "^1.17.1"
+  }
+}
